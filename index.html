@@ -19,7 +19,7 @@
     </style>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link rel="stylesheet" href="./src/leaflet.legend.css" />
     <script type="text/javascript" src="./src/leaflet.legend.js"></script>
     
@@ -69,6 +69,66 @@
 		  font-size: 0.8rem;
 		  color: #7f7f7f;
 		}
+		
+		#fade {
+		display: none;
+		position: fixed;
+		top: 0%;
+		left: 0%;
+		width: 100%;
+		height: 100%;
+		background-color: black;
+		z-index: 1001;
+		-moz-opacity: 0.8;
+		opacity: .80;
+		filter: alpha(opacity=80);
+	  }
+	  
+	  #light {
+		display: none;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		max-width: 600px;
+		max-height: 360px;
+		margin-left: -300px;
+		margin-top: -180px;
+		border: 2px solid #FFF;
+		background: #FFF;
+		z-index: 1002;
+		overflow: visible;
+	  }
+	  
+	  #boxclose {
+		float: right;
+		cursor: pointer;
+		color: #fff;
+		border: 1px solid #AEAEAE;
+		border-radius: 3px;
+		background: #222222;
+		font-size: 31px;
+		font-weight: bold;
+		display: inline-block;
+		line-height: 0px;
+		padding: 11px 3px;
+		position: absolute;
+		right: 2px;
+		top: 2px;
+		z-index: 1002;
+		opacity: 0.9;
+	  }
+	  
+	  .boxclose:before {
+		content: "×";
+	  }
+	  
+	  #fade:hover ~ #boxclose {
+		display:none;
+	  }
+	  
+	  .test:hover ~ .test2 {
+		display: none;
+	  }
 	  </style>
 
     <script src="LIPNO_FP.js"></script>
@@ -83,10 +143,11 @@
 
 <body>
     <div id="map"></div>
-<div id="light">
+	
+	<div id="light">
 		<a class="boxclose" id="boxclose" onclick="lightbox_close();"></a>
 		<video id="VisaChipCardVideo" width="600" controls>
-			<source src="./DJI_0386.mp4" type="video/mp4">
+			<source src="./0003.mp4" type="video/mp4">
 			<!--Browser does not support <video> tag -->
 		  </video>
 	  </div>
@@ -438,7 +499,7 @@ function style_LIPNO_L(feature){
 		};
 	}
 }
-	
+
 window.document.onkeydown = function(e) {
   if (!e) {
     e = event;
@@ -473,16 +534,6 @@ var LIPNO_L= L.geoJson(LIPNO_L,{style:style_LIPNO_L}).bindPopup('<h3><b><center>
 										 closeOnClick:true,
 										 className:'balon'}).addTo(map);
 
-var LIPNO_L= L.geoJson(LIPNO_L,{style:style_LIPNO_L}).bindPopup('<h3><b><center> BULWAR POLI NEGRI </h3></b></center> <a href="./img/bulwar.jpg"  data-fslightbox="example-gallery8" ><img src="./img/bulwar.jpg" width="150px" alt=" wejśce n bulwar"/></a><a>Archiwum Prywatne </a>',
-										{maxWidth:150,
-										 minWidth:50,						  
-										 closeButton:true,
-										 autoPan:true,
-										 autoPanPadding:[50,50],
-										 zoomAnimation:true,
-										 closeOnClick:true,
-										 className:'balon'}).addTo(map);
-
 										
  function style_LIPNO_L2(feature){
 	if("ULICA" == feature.properties.UWAGI){
@@ -507,7 +558,7 @@ var LIPNO_L2= L.geoJson(LIPNO_L2,{style:style_LIPNO_L2}).bindPopup('<h3><b><cent
 										 closeOnClick:true,
 										 className:'balon'}).addTo(map);
 																				
-										
+
 	     
 		  const left = '<div class="header">Festiwal "POLA I INNI"</div>';
       let contents = `
@@ -582,8 +633,8 @@ W Lipnie wisi tablica poświęcona jej pamięci, a do odwiedzenia zaprasza Izba 
 
 	</script>
 		
-	<script src="fslightbox.js"></script>	
-	<a href="https://www.youtube.com/watch?v=iWgsXbhDopY" data-fslightbox="example-gallery8"></a>
+	</body>
+	
 	
 	<script src="lightbox-plus-jquery.min.js"></script>
 	<a href="./img/izba1.jpeg" data-lightbox="example-gallery" ></a>
@@ -663,6 +714,6 @@ W Lipnie wisi tablica poświęcona jej pamięci, a do odwiedzenia zaprasza Izba 
 	<a href="./img/pn2023.jpg" data-lightbox="example-gallery3" ></a>
 
 
-  </body>
+  
   
 </html>
