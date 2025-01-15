@@ -83,7 +83,16 @@
 
 <body>
     <div id="map"></div>
-</body>
+<div id="light">
+		<a class="boxclose" id="boxclose" onclick="lightbox_close();"></a>
+		<video id="VisaChipCardVideo" width="600" controls>
+			<source src="./DJI_0386.mp4" type="video/mp4">
+			<!--Browser does not support <video> tag -->
+		  </video>
+	  </div>
+	  
+	  <div id="fade" onClick="lightbox_close();"></div>
+
 <script type="text/javascript">
 
     
@@ -429,6 +438,41 @@ function style_LIPNO_L(feature){
 		};
 	}
 }
+	
+window.document.onkeydown = function(e) {
+  if (!e) {
+    e = event;
+  }
+  if (e.keyCode == 27) {
+    lightbox_close();
+  }
+}
+
+function lightbox_open() {
+  var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+  window.scrollTo(0, 0);
+  document.getElementById('light').style.display = 'block';
+  document.getElementById('fade').style.display = 'block';
+  lightBoxVideo.play();
+}
+
+function lightbox_close() {
+  var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+  document.getElementById('light').style.display = 'none';
+  document.getElementById('fade').style.display = 'none';
+  lightBoxVideo.pause();
+}
+
+var LIPNO_L= L.geoJson(LIPNO_L,{style:style_LIPNO_L}).bindPopup('<h3><b><center> BULWAR POLI NEGRI </h3></b></center> <a href="#" onclick="lightbox_open();"><div><img src="./img/bulwar.jpg" width="150px" alt=" wejśce n bulwar"/></div></a><a>Archiwum Prywatne </a>',
+										{maxWidth:150,
+										 minWidth:50,						  
+										 closeButton:true,
+										 autoPan:true,
+										 autoPanPadding:[50,50],
+										 zoomAnimation:true,
+										 closeOnClick:true,
+										 className:'balon'}).addTo(map);
+
 var LIPNO_L= L.geoJson(LIPNO_L,{style:style_LIPNO_L}).bindPopup('<h3><b><center> BULWAR POLI NEGRI </h3></b></center> <a href="./img/bulwar.jpg"  data-fslightbox="example-gallery8" ><img src="./img/bulwar.jpg" width="150px" alt=" wejśce n bulwar"/></a><a>Archiwum Prywatne </a>',
 										{maxWidth:150,
 										 minWidth:50,						  
